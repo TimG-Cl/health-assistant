@@ -82,7 +82,7 @@ def analyze_with_claude(today_data: dict, question: str = None) -> str:
 Дай: 📊 Итог дня / ✅ Что хорошо / ⚠️ Что улучшить / 💡 Рекомендации / 🎯 Прогресс"""
 
     response = claude.messages.create(
-        model="claude-sonnet-4-20250514",
+        model="claude-sonnet-4-6",
         max_tokens=1000,
         system=SYSTEM_PROMPT,
         messages=[{"role": "user", "content": prompt}],
@@ -116,7 +116,7 @@ async def cmd_week(update: Update, context: ContextTypes.DEFAULT_TYPE):
         return
     history_text = "\n".join([f"{r['date']}: {r.get('steps','?')} шагов, сон {r.get('sleep_hours','?')}ч" for r in history])
     response = claude.messages.create(
-        model="claude-sonnet-4-20250514",
+        model="claude-sonnet-4-6",
         max_tokens=1200,
         system=SYSTEM_PROMPT,
         messages=[{"role": "user", "content": f"Еженедельный отчёт:\n{history_text}\nЦели: {json.dumps(USER_GOALS, ensure_ascii=False)}"}],
